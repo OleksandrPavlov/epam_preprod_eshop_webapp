@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="/static/img/icons8-food-cart-48.png" type="image/png">
+
+    <script src="https://kit.fontawesome.com/99570d6d36.js" crossorigin="anonymous"></script>
+    <link href="cart.css" rel="stylesheet"/>
+    <title>TShop</title>
+</head>
+<body>
+<header>
+    <div class="row dark-background">
+        <div class="col-xs-12 col-sm-4">
+            <div class="">
+                <a class="navbar-brand company-title" href="face-page.html">TShop</a>
+            </div>
+        </div>
+        <div class="col-sm-5">
+        </div>
+        <div class="col-xs-10 col-sm-3 mg-tb-5 mt-10 " style="text-align: center;">
+            <img class="avatar" src="${avatar}"/>
+            <a href="/registrate">Registrate</a>
+        </div>
+    </div>
+</header>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!--Here will be some additional info or bars-->
+        <aside class="col-xs-12 col-sm-4 col-md-3 col-lg-2" style="background-color: red">
+            <!--Feature block -->
+            ASIDE
+        </aside>
+        <!--Here will be product cart body -->
+        <main class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+            <!-- CART -->
+            <div id="cart">
+                <div class="header">
+                    My product cart
+                </div>
+                <div class="body">
+                    <table class="table table-bordered" id="orderItem_12345">
+                        <thead>
+                        <tr>
+                            <th>photo</th>
+                            <th>description</th>
+                            <th>count</th>
+                            <th>price</th>
+                            <th>total</th>
+                            <th>action</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td class="text-center pic">
+                                <img src="../../static/img/product/download.jpg"><br/>
+                                Name of product
+                            </td>
+                            <td class="description text-center">description</td>
+                            <td class="count text-center">
+                                <input type="number" value="1" class="productCounter" min="1" max="1000"
+                                       id="count_12345"/>
+                            </td>
+                            <td class="price text-center">$ 123</td>
+                            <td class="total text-center">$ 123</td>
+                            <td class="action text-center">
+                                <button type="button" class="btn btn-danger removeProduct" id="remove_12345">remove
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                cart body
+                <div class="footer">
+                    <button type="button" class="btn btn-info">do order</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer>
+    <!-- TO DO FOOTER-->
+</footer>
+<!--Some hidden staff for inner calculations-->
+<a class="preference-link"></a>
+
+
+<!--Custom scripts-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<script src="productCart.js"></script>
+
+<!--<script src="static/js/custom.js"></script>-->
+</body>
+</html>

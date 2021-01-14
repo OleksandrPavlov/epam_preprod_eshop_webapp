@@ -1,0 +1,6 @@
+<security>
+    <constraint>
+        <urlPattern>/products/*</urlPattern>
+        <role>user</role>
+    </constraint>
+</security>

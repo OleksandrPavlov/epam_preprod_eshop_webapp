@@ -1,0 +1,39 @@
+#cart{
+background-color: yellow;
+border-radius: 5px;
+padding: 5px;
+
+}
+#cart .header{
+background-color: green;
+border-bottom: solid 1px black;
+}
+
+#cart .body{
+background-color: #569ab0;
+padding: 30px 10px 30px 10px;
+}
+
+#cart .footer{
+background-color: #aa77c9;
+border-top: solid black 1px;
+}
+
+#cart table img{
+   max-height: 80px;
+   margin:0 auto;
+   display: block;
+}
+
+.text-center{
+text-align: center;
+}
+#cart table td{
+vertical-align: inherit;
+}
+#cart table thead{
+background-image: linear-gradient(to bottom, #9cd1d6,#67999e);
+}
+#cart table .count input{
+width: 50px;
+}
