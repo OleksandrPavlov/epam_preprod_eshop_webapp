@@ -1,0 +1,96 @@
+Important! 
+To launch the app you need to run sql script to your MySQL DB by path: eshop/src/script/eshop_mysql_script.sql
+Also it highly significant to configure some settings of JDBC by eshop/src/main/resources/application.properties
+
+Electronic product shop webapp.
+	
+Work flow logic description:
+	Registration process:
+		User goes to context/registration endpoint.
+		-Fills in the registration form with the ability to select an avatar (if no avatar is selected, it is substituted by default).
+		Inputed data passes primary validation and checking on authenticity. 
+		-If the user entered incorrect data or there is already a user in the system with the same data, the system redirects the request
+		to the same page with saving the form, after which the user can correct the incorrect data.
+		-If the data is entered correctly and there is no user with the same data in the system, the system redirects
+		request for context/captcha endpoint to pass validation.
+		-After captcha has been updated the user have limited time to enter code, after time is up the captcha become invalid. The attempt to 
+		enter stitched captcha will finish by redirecting user to the page with newly generated captcha code.
+		-Attempt entering stitched captcha will end by redirecting the user to the page with the new generated captcha code.
+		After entering captcha code has been succed the user will be redirected to context/products
+	Login Process:
+		The user is prompted to enter a username and password.
+		After submitting the form, the entered data is validated and an attempt is made to identify the user in the database. In 
+		case of failure, an error message is sent to the user; in case of success, the user account is placed in the session.
+	Products(context/products):
+		Product presentation page.
+		The page consist of the Product section, Product representation preferences section and Search section.
+			-Product section
+				contains product entities selected by the user in the search device, the section is equipped with pagination for easy navigation through the products.
+			-Product representation preferences section
+				provides functionality for switching sorting options (possible by name and price), as well as the choice of quantity
+				displayed products (12 or 36) in the products section.
+			-Search section
+				provides functional for product searching by some attributes:
+					by name
+					by producer
+					by category
+					by price
+					or by their combination.
+	ProductCart: (context/product-cart)
+		The page represent customer's product cart. Consist of product enumeration that was bought by user and brief info about each.
+		The user has the ability to remove an item from the cart, change the quantity, and also clear the entire cart.
+		After viewing and confirming the selected goods, the user proceeds to the choice of the payment method.
+	Payment method: (context/makeOrder)
+		This page contains a form for choosing payment methods. Upon choosing one of them, payment is emulated and upon completion, the user is redirected to
+		product page with appropriate notice.
+	
+Localization:Every page head equiped by language button, currently acceptable two locales - RU and EN.
+		Logic for defining language:
+		1)If there is locale in request then get it , if not - go to step 2.
+		2)basing on current locale storing strategy, check if there is saved locale in adjusted storage, if there - take it, in another case go to step 3.
+		3)check client request header 'language-accept '. The system adjust the language that most relevant
+ 			for client and supported by system, in another case the system adjust default language - EN.
+
+Features:
+	-The user cannot select a payment method without logging in.
+	-The user cannot select a payment method with an empty cart.
+	-All files with the extension .css .js .html are compressed into zip format, provided that the browser from which the request is sent supports decompression.
+Configurations:
+	Localization ****************************************************************************************
+		The application allows you to configure the storage strategy of the locale using the deployment descriptor.
+		The parameter is passed through the initialization parameters of the LocaleFilter.
+		Example:
+			<filter>
+				<filter-name>LocaleFilter</filter-name>
+				<filter-class>com.epam.preprod.pavlov.filter.http.LocaleFilter</filter-class>
+				<init-param>
+					<param-name>adjustedLocales</param-name>
+					<param-value>en_EN|ru_RU</param-value>
+				</init-param>
+				<init-param>
+					<param-name>storingStrategy</param-name>
+					<param-value>session</param-value>
+				</init-param>
+			</filter>
+		storingStrategy supports two values: session(the locale is stored in HttpSession) и cookie(the locale is stored in cookie).
+	AvatarStoring ****************************************************************************************
+		The system allows to set a place for storing ueser's avatar on hard disc.
+		To set the address, you need to change the key value path.avatar in properties file eshop/src/main/resources/application.properties to 
+		the place you want to store avatar images in.
+ 		Also it recommended to place there default avatar that will be represented if user did not choose any avatar.
+		Important!!! The name of your custom defaul avatar should be def-ava.png! Otherwise the will be adjusted system's default avatar.
+		If you do not override the position key of the folder with avatars, a folder will be created inside the application.
+	DataBase connection **********************************************************************************
+		JDBC driver and connection pool configuration can be set inside eshop/src/main/resources/application.properties
+	Captcha configuration ********************************************************************************
+		The application allows you to select the storage location for the captcha identifier and the correct answer associated with it within the session or in cookies.
+		You can configure the storage location for the object in the deployment descriptor by setting the context initialization parameters.
+		Example: 
+			 <context-param>
+				<param-name>captcha-storing-strategy</param-name>
+				<param-value>context</param-value>
+			</context-param>
+		Two parameter names are supported: context(storing inside ServletContext) и session(storing inside HttpSession)
+*The application supports two strategies for storing the selected locale - in object ServletSession an inside cookies. 
+
+
